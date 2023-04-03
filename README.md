@@ -36,15 +36,21 @@ on:
 
 jobs:
   code-review:
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      statuses: write
     runs-on: ubuntu-latest
     steps:
-      - uses: fitomad/github-chatgpt-integration@main
+      - uses: xianhuawei/github-chatgpt-integration@main
         with:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           github-token: ${{ secrets.GH_TOKEN }}
           github-pr-id: ${{ github.event.number }}
           dev-lang: Swift
           openai-max-tokens: 4096
+          #exclude-dir: ""
 ```
 
 ## GitHub Action 
@@ -57,8 +63,3 @@ Using the `update-index` parameter we will be sure that the execution flag will 
 $ git add entrypoint.sh
 $ git update-index --chmod=+x entrypoint.sh
 ```
-
-## Contact
-
-* **Email** [adolfo.vera@globant.com](mailto:adolfo.vera@globant.com)
-* **LinkedIn** [https://www.linkedin.com/in/adolfo-vera](https://www.linkedin.com/in/adolfo-vera)
